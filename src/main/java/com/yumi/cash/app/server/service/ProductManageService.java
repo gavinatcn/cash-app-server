@@ -50,11 +50,11 @@ public class ProductManageService {
         return productListDTO;
 
     }
-/*
-    public ProductBasicInfo getProductBasicInfoByProductId(String productId) {
 
-        return this.productBasicInfoMapper.selectByPrimaryKey()
+    public ProductBasicInfoDO getProductBasicInfoByProductId(String productId) {
+
+        return this.productBasicInfoMapper.selectByPrimaryKey(productId);
 
     }
-*/
+
 }
