@@ -22,5 +22,5 @@ v1.1.1
 2. Update file, generatorConfig.xml, by setting "defaultModelType="flat"" to prevent genenrating "ResultMapWithBLOBs"
 
 
-v1.2.0 (planning)
-1. Add log support
+v1.2.0
+1. Add log support using LogBack

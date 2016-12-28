@@ -7,6 +7,8 @@ import com.yumi.cash.app.server.dto.ProductListParam;
 import com.yumi.cash.app.server.exception.NotifyException;
 import com.yumi.cash.app.server.service.ProductManageService;
 import com.yumi.cash.app.server.util.Md5Util;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.ResponseEntity;
@@ -21,6 +23,8 @@ import org.springframework.web.bind.annotation.RequestMethod;
 
 @Controller
 public class ProductListController  extends BaseController{
+
+    private static final Logger logger = LoggerFactory.getLogger(ProductListController.class);
 
     @Autowired
     private ProductManageService productManageService;
@@ -42,13 +46,15 @@ public class ProductListController  extends BaseController{
         }catch (Exception ex){
             if(ex instanceof NotifyException){
                 responseEntity = this.buildErrorResp((NotifyException) ex);
-                //TODO:output normally
-                ex.printStackTrace();
+
+                logger.error(((NotifyException) ex).getErrorMsg());
+
             }else {
                 responseEntity = this.buildErrorResp(new NotifyException(ResultStatusEnum.SYSTEM_ERROR.getCode(), ResultStatusEnum.SYSTEM_ERROR.getMessage()));
-                //TODO:output normally
-                ex.printStackTrace();
             }
+
+            logger.error(ex.getMessage(), ex);
+
         }
 
         return responseEntity;

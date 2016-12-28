@@ -8,6 +8,8 @@ import com.yumi.cash.app.server.exception.NotifyException;
 import com.yumi.cash.app.server.service.ApplicationInitService;
 import com.yumi.cash.app.server.util.Md5Util;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.ResponseEntity;
@@ -23,6 +25,8 @@ import org.springframework.web.bind.annotation.RequestMethod;
 @Controller
 public class ApplicationInitController extends BaseController{
 
+	private static final Logger logger = LoggerFactory.getLogger(ApplicationInitController.class);
+
 	@Autowired
 	private ApplicationInitService applicationInitService;
 
@@ -31,6 +35,8 @@ public class ApplicationInitController extends BaseController{
 												   @RequestBody @Validated ApplicationInitParam applicationInitParam,
 												   BindingResult result){
 
+		logger.debug("应用初始化开始！");
+
 		ResponseEntity<BaseDTO> responseEntity = null;
 
 		try{
@@ -38,20 +44,25 @@ public class ApplicationInitController extends BaseController{
 				throw new NotifyException(ResultStatusEnum.PARAM_ERROR.getCode(),ResultStatusEnum.PARAM_ERROR.getMessage()+"|"+result.getAllErrors().get(0).getDefaultMessage());
 			}
 
+			logger.debug("签名检验");
 			doSignCheck(sign, applicationInitParam);
+			logger.debug("应用初始化业务处理");
 			responseEntity = doBusiness(applicationInitParam);
 		}catch (Exception ex){
 			if(ex instanceof NotifyException){
 				responseEntity = this.buildErrorResp((NotifyException) ex);
-				//TODO:output normally
-				ex.printStackTrace();
+
+				logger.error(((NotifyException) ex).getErrorMsg(), ex);
+
 			}else {
 				responseEntity = this.buildErrorResp(new NotifyException(ResultStatusEnum.SYSTEM_ERROR.getCode(), ResultStatusEnum.SYSTEM_ERROR.getMessage()));
-				//TODO:output normally
-				ex.printStackTrace();
+
+				logger.error(ex.getLocalizedMessage(), ex);
+
 			}
 		}
 
+		logger.debug("应用初始化结束");
 		return responseEntity;
 
 	}
