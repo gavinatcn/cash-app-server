@@ -6,7 +6,7 @@
 <generatorConfiguration>
 	<classPathEntry location="/Users/gavin/.m2/repository/mysql/mysql-connector-java/5.1.24/mysql-connector-java-5.1.24.jar" />
 
-	<context id="DB2Tables" targetRuntime="MyBatis3">
+	<context id="DB2Tables" targetRuntime="MyBatis3" defaultModelType="flat">
 
 		<commentGenerator>
 			<property name="suppressDate" value="true" />
@@ -23,22 +23,22 @@
 
 		<javaModelGenerator targetPackage="com.yumi.cash.app.server.dao"
 							targetProject="src/main/java">
-			<property name="enableSubPackages" value="false" />
+			<property name="enableSubPackages" value="true" />
 			<property name="trimStrings" value="true" />
 		</javaModelGenerator>
 
 		<sqlMapGenerator targetPackage="com.yumi.cash.app.server.mapper"
 						 targetProject="src/main/resources">
-			<property name="enableSubPackages" value="false" />
+			<property name="enableSubPackages" value="true" />
 		</sqlMapGenerator>
 
 		<javaClientGenerator type="XMLMAPPER"
 							 targetPackage="com.yumi.cash.app.server.dal" targetProject="src/main/java">
-			<property name="enableSubPackages" value="false" />
+			<property name="enableSubPackages" value="true" />
 		</javaClientGenerator>
 
 		<!-- 配置所需要生成的表 -->
-		<table tableName="PRODUCT_BASIC_INFO" domainObjectName="ProductBasicInfo"></table>
+		<table tableName="PRODUCT_BASIC_INFO" domainObjectName="ProductBasicInfoDO"></table>
 
 	</context>
 

@@ -4,7 +4,7 @@ V1.0.0
 2. Realizing the first web interface for application initialization with digital signature and validation.
 3. Database configuration is necessary.
 
-v1.0.1
+v1.1.0
 1. Add mybatis-generator support by following steps:
     1) Add generatorConfig.xml;
     2) Add plugin, org.mybatis.generator, in pom.xml;
@@ -17,5 +17,10 @@ v1.0.1
 3. Configure database connection and mybatis properties in application.properties.
     Specially, in "jdbc:mysql://127.0.0.1:3306/cash", "cash" is schema.
 
-v1.0.2 (planning)
+v1.1.1
+1. API, /proddetail
+2. Update file, generatorConfig.xml, by setting "defaultModelType="flat"" to prevent genenrating "ResultMapWithBLOBs"
+
+
+v1.2.0 (planning)
 1. Add log support

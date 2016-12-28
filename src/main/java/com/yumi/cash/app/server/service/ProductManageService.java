@@ -1,8 +1,8 @@
 package com.yumi.cash.app.server.service;
 
-import com.yumi.cash.app.server.dal.ProductBasicInfoMapper;
-import com.yumi.cash.app.server.dao.ProductBasicInfo;
-import com.yumi.cash.app.server.dao.ProductBasicInfoExample;
+import com.yumi.cash.app.server.dal.ProductBasicInfoDOMapper;
+import com.yumi.cash.app.server.dao.ProductBasicInfoDO;
+import com.yumi.cash.app.server.dao.ProductBasicInfoDOExample;
 import com.yumi.cash.app.server.dto.ProductAbstractInfoDTO;
 import com.yumi.cash.app.server.dto.ProductListDTO;
 import com.yumi.cash.app.server.dto.ProductListParam;
@@ -16,21 +16,21 @@ import java.util.List;
 public class ProductManageService {
 
     @Autowired
-    private ProductBasicInfoMapper productBasicInfoMapper;
+    private ProductBasicInfoDOMapper productBasicInfoMapper;
 
     public ProductListDTO getProductAbstractInfoList(ProductListParam productListParam) {
 
         ProductListDTO productListDTO = new ProductListDTO();
 
         //查询产品列表
-        ProductBasicInfoExample productExample = new ProductBasicInfoExample();
+        ProductBasicInfoDOExample productExample = new ProductBasicInfoDOExample();
         productExample.createCriteria().andProdCatgEqualTo(productListParam.getProdCatlog());
 
-        List<ProductBasicInfo> productBasicInfoList = this.productBasicInfoMapper.selectByExample(productExample);
+        List<ProductBasicInfoDO> productBasicInfoList = this.productBasicInfoMapper.selectByExample(productExample);
 
         //遍历查询结果，并转化为摘要信息列表
         List<ProductAbstractInfoDTO> productList = new ArrayList<>();
-        for(ProductBasicInfo prod:productBasicInfoList) {
+        for(ProductBasicInfoDO prod:productBasicInfoList) {
 
             ProductAbstractInfoDTO productAbstractInfoDTO = new ProductAbstractInfoDTO();
 
@@ -50,5 +50,11 @@ public class ProductManageService {
         return productListDTO;
 
     }
+/*
+    public ProductBasicInfo getProductBasicInfoByProductId(String productId) {
 
+        return this.productBasicInfoMapper.selectByPrimaryKey()
+
+    }
+*/
 }
