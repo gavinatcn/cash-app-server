@@ -30,6 +30,7 @@ public class ApplicationInitController extends BaseController{
 	public ResponseEntity<BaseDTO> applicationInit(@RequestHeader(value = "sign")String sign,
 												   @RequestBody @Validated ApplicationInitParam applicationInitParam,
 												   BindingResult result){
+
 		ResponseEntity<BaseDTO> responseEntity = null;
 
 		try{

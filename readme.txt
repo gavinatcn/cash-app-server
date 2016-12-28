@@ -9,7 +9,13 @@ v1.0.1
     1) Add generatorConfig.xml;
     2) Add plugin, org.mybatis.generator, in pom.xml;
     3) Configure maven command, mybatis-generator;
-    4) Configure file, generatorConfig.xml, for mysql.
+    4) Configure file, generatorConfig.xml, for mysql;
+    5) Specially, in "jdbc:mysql://127.0.0.1:3306/cash", "cash" is schema.
+2. Support mybatis in Spring,
+    1) Add dependency for mybatis, org.mybatis.spring.boot, in pom.xml;
+    2) Modify CashAppServerApplication.java, adding "@MapperScan("com.yumi.cash.app.server.dal*")".
+3. Configure database connection and mybatis properties in application.properties.
+    Specially, in "jdbc:mysql://127.0.0.1:3306/cash", "cash" is schema.
 
 v1.0.2 (planning)
 1. Add log support
